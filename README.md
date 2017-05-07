@@ -11,3 +11,7 @@ This tool is intended to be used in CLI for now but I'm planning a pretty UI-pro
 ## What is being currently worked on?
 - Changing fan speed
 - (Interactive(?)) Interface for usage by other programs (e.g. GUIs)
+
+## What may come?
+- Makefile
+- AUR Repo
