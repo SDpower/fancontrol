@@ -28,6 +28,8 @@ ls, list
 	Shows a list with information about cards installed
 pls, plainlist
 	Same as above but with ugly format. Thought for being used by other programs.
+set <card> <"auto"|0-100>
+	Setting the fan speed
 	`)
 }
 
