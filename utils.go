@@ -19,7 +19,15 @@ func readSysFileToInt(path string) int {
 }
 
 func overrideSysFile(path, data string) {
-	// Not Implemented yet
+	err := ioutil.WriteFile(path, []byte(data), 0644)
+
+	if err != nil {
+		panic(err.Error())
+	}
+}
+
+func overrideSysFileWithInt(path string, data int) {
+	overrideSysFile(path, strconv.FormatInt(int64(data), 10))
 }
 
 func percentage(x, a, b int) int {
@@ -108,4 +116,17 @@ func getTemperatureAsString(card string) string {
 func getFanMode(card string) int {
 	tempStr := readSysFileToInt("/sys/class/drm/" + card + "/device/hwmon/hwmon1/pwm1_enable")
 	return tempStr
+}
+
+func setFanMode(card string, m int) {
+	overrideSysFileWithInt("/sys/class/drm/"+card+"/device/hwmon/hwmon1/pwm1_enable", m)
+}
+
+func setFanSpeed(card string, p int) {
+	min := readSysFileToInt("/sys/class/drm/" + card + "/device/hwmon/hwmon1/pwm1_min")
+	max := readSysFileToInt("/sys/class/drm/" + card + "/device/hwmon/hwmon1/pwm1_max")
+
+	speed := int(((float64(p)/100.0)*(float64(max)-float64(min)) + float64(min)))
+
+	overrideSysFileWithInt("/sys/class/drm/"+card+"/device/hwmon/hwmon1/pwm1", speed)
 }

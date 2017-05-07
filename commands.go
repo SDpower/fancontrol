@@ -6,6 +6,8 @@ import (
 
 	"strconv"
 
+	"strings"
+
 	"github.com/olekukonko/tablewriter"
 )
 
@@ -79,4 +81,29 @@ func printGetFanSpeed(command []string) {
 	} else if len(command) == 2 {
 		fmt.Println(getFanSpeedAsString(command[1]) + "%")
 	}
+}
+
+func setFan(command []string) {
+	if len(command) != 3 {
+		fmt.Println("Wrong number of arguments")
+		return
+	}
+
+	card := command[1]
+	speed := command[2]
+
+	if strings.EqualFold(speed, "auto") {
+		fmt.Println("Setting speed of " + card + " to: auto")
+		setFanMode(card, 2)
+	} else {
+		speedInt, _ := strconv.ParseInt(speed, 10, 32)
+		if speedInt >= 0 && speedInt <= 100 {
+			fmt.Println("Setting speed of " + card + " to: " + speed)
+			setFanMode(card, 1)
+			setFanSpeed(card, int(speedInt))
+		} else {
+			fmt.Println("Wrong speed argument")
+		}
+	}
+
 }

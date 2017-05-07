@@ -24,6 +24,8 @@ func main() {
 		prettyPrintListCards(command)
 	case "pls", "plainlist":
 		plainPrintListCards(command)
+	case "set":
+		setFan(command)
 	}
 
 }
