@@ -15,3 +15,4 @@ This tool is intended to be used in CLI for now but I'm planning a pretty UI-pro
 ## What may come?
 - Makefile
 - AUR Repo
+- Controlling ALL system fans
