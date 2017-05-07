@@ -10,17 +10,23 @@ import (
 )
 
 func printUsage() {
-	fmt.Println("Usage: fanctl [options] <command> [arguments...]")
-	fmt.Println("More help: fanctl help")
+	fmt.Println("Usage: fancontrol [options] <command> [arguments...]")
+	fmt.Println("More help: fancontrol help")
 }
 
 func printHelp() {
-	fmt.Println("Usage: fanctl [options] <command> [arguments...]")
+	fmt.Println("Usage: fancontrol [options] <command> [arguments...]")
 
 	//fmt.Println("Options:")
 
-	fmt.Println("Commands:")
-	fmt.Println("help \t Prints this help")
+	fmt.Println(`Commands:
+help
+	Dispalys this help
+ls, list
+	Shows a list with information about cards installed
+pls, plainlist
+	Same as above but with ugly format. Thought for being used by other programs.
+	`)
 }
 
 func plainPrintListCards(command []string) {
@@ -30,6 +36,8 @@ func plainPrintListCards(command []string) {
 			fmt.Printf("%s\t%s\t%s\t%s\n", f.card, f.name, f.temp, f.fan)
 		}
 		fmt.Println(len(list))
+	} else {
+		newCard(command[1])
 	}
 }
 
